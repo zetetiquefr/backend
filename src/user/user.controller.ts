@@ -19,7 +19,7 @@ import { UserQueryParamDto } from './dto/userQueryParam.dto';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post('/')
+  @Get('/')
   async getUser(
     @Body() filter: UserFilterDto,
     @Query('page') page: number,
@@ -55,7 +55,7 @@ export class UserController {
     return await this.userService.getUserByName(name);
   }
 
-  @Post('/create')
+  @Post('/')
   async createUser(@Body() user: CreateUserDto): Promise<User> {
     return await this.userService.createUser(user);
   }
