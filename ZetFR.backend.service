@@ -1,0 +1,12 @@
+[Unit]
+Description=armtek backend document service
+After=network.target
+
+[Service]
+Type=simple
+EnvironmentFile=/home/fedora/ZetFR/backend/.env
+User=fedora
+ExecStart=/usr/bin/npm --prefix /home/fedora/ZetFR/backend start
+
+[Install]
+WantedBy=multi-user.target
