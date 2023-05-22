@@ -1,5 +1,5 @@
 [Unit]
-Description=armtek backend document service
+Description=ZetFR backend
 After=network.target
 
 [Service]
