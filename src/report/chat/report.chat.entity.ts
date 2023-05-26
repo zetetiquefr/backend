@@ -1,5 +1,5 @@
-import { Chat } from 'src/chat/chat.entity';
-import { User } from 'src/user/user.entity';
+import { Chat } from '../../chat/chat.entity';
+import { User } from '../../user/user.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 export enum ReportChatStatus {

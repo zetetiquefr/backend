@@ -34,6 +34,7 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
+        envFilePath: [".env"],
         type: "mariadb",
         host: configService.get("DB_HOST"),
         port: +configService.get("DB_PORT"),

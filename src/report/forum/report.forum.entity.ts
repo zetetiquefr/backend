@@ -5,8 +5,8 @@ import {
   JoinTable,
   Column,
 } from 'typeorm';
-import { Forum } from 'src/forum/forum.entity';
-import { User } from 'src/user/user.entity';
+import { Forum } from '../../forum/forum.entity';
+import { User } from '../../user/user.entity';
 
 export enum ReportForumStatus {
   PENDING = 'PENDING',

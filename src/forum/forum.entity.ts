@@ -8,9 +8,9 @@ import {
   JoinTable,
 } from 'typeorm';
 import { User } from '../user/user.entity';
-import { Chat } from 'src/chat/chat.entity';
-import { Tag } from 'src/tag/tag.entity';
-import { ReportForum } from 'src/report/forum/report.forum.entity';
+import { Chat } from '../chat/chat.entity';
+import { Tag } from '../tag/tag.entity';
+import { ReportForum } from '../report/forum/report.forum.entity';
 
 @Entity()
 export class Forum {
