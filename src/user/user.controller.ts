@@ -27,8 +27,8 @@ export class UserController {
   ): Promise<any> {
     const queryParam: UserQueryParamDto = {
       paging: {
-        page: page,
-        pageSize: pageSize,
+        page: page || 1,
+        pageSize: pageSize || 10,
       },
     };
 
