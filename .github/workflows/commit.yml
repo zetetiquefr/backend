@@ -1,7 +1,7 @@
 name: NodeJS commit Testing
 
 on:
-  commit:
+  push:
     branches: [ "*" ]
 
 jobs:
