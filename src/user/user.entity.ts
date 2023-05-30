@@ -21,12 +21,6 @@ export class User {
     this.email = email;
     this.password = password;
 
-    this.roles = [];
-    this.forums = [];
-    this.chats = [];
-    this.reportsForum = [];
-    this.reportsChat = [];
-    this.chatHistory = [];
     this.archived = false;
     this.uuid = uuidv4();
   }

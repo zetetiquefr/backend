@@ -55,15 +55,6 @@ describe("UserController", () => {
     it("Must not be archived", async () => {
       expect(createdUser.archived).toBeFalsy();
     });
-
-    it("Must have empty fields", async () => {
-      expect(createdUser.roles).toEqual([]);
-      expect(createdUser.chats).toEqual([]);
-      expect(createdUser.forums).toEqual([]);
-      expect(createdUser.chatHistory).toEqual([]);
-      expect(createdUser.reportsChat).toEqual([]);
-      expect(createdUser.reportsForum).toEqual([]);
-    });
   });
 
   describe("findAll", () => {
@@ -111,7 +102,9 @@ describe("UserController", () => {
       UserMock.findAllCreatedUser.map(async (user) => {
         await userController.createUser({ ...user });
       });
+    });
 
+    it("should return all users", async () => {
       const res = await userController.getUser({} as UserFilterDto, 1, 10);
 
       expect(res).toBeDefined();

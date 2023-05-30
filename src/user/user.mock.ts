@@ -21,16 +21,36 @@ const findAllAllUsers: User[] = [
   ...findAllCreatedUser,
 ];
 
+const getRouteUsers: User[] = [
+  new User("getRoute1", "getroute1@gmail.com", "getroute1"),
+  new User("getRoute2", "getroute2@gmail.com", "getroute2"),
+  new User("getRoute3", "getroute3@gmail.com", "getroute3"),
+  new User("getRoute4", "getroute4@gmail.com", "getroute4"),
+  new User("getRoute5", "getroute5@gmail.com", "getroute5"),
+  new User("getRoute6", "getroute6@gmail.com", "getroute6"),
+  new User("getRoute7", "getroute7@gmail.com", "getroute7"),
+];
+
+const getUserUuid: User = new User(
+  "getUserUuid",
+  "getuseruuid@gmail.com",
+  "getuseruuid"
+);
+
+const postUser: User = new User("test1", "test1@gmail.com", "test1");
+
 const userMock = {
   find: jest.fn().mockImplementation((filter) => {
     if (filter) {
+      if (!filter.where) {
+        throw new Error("filter.where is undefined");
+      }
       const res = userArray.filter((user) => {
-        if (filter.name) {
-          return user.name === filter.name;
+        if (filter.where.name) {
+          return user.name === filter.where.name;
         }
         return true;
       });
-      console.log("filter", filter);
       return res.splice(filter.skip, filter.take);
     }
     return userArray;
@@ -41,9 +61,12 @@ const userMock = {
   }),
   count: jest.fn().mockImplementation((filter) => {
     if (filter) {
+      if (!filter.where) {
+        throw new Error("filter.where is undefined");
+      }
       return userArray.filter((user) => {
-        if (filter.name) {
-          return user.name === filter.name;
+        if (filter.where.name) {
+          return user.name === filter.where.name;
         }
         return true;
       }).length;
@@ -53,6 +76,27 @@ const userMock = {
   reset: jest.fn().mockImplementation(() => {
     userArray = [];
   }),
+  findOne: jest.fn().mockImplementation((filter) => {
+    if (filter) {
+      if (!filter.where) {
+        throw new Error("filter.where is undefined");
+      }
+
+      let res = userArray;
+
+      if (filter.where.name) {
+        res = res.filter((user) => user.name === filter.where.name);
+      }
+      if (filter.where.email) {
+        res = res.filter((user) => user.email === filter.where.email);
+      }
+      if (filter.where.uuid) {
+        res = res.filter((user) => user.uuid === filter.where.uuid);
+      }
+      return res[0];
+    }
+    throw new Error("filter is undefined");
+  }),
 };
 
 export default {
@@ -61,4 +105,8 @@ export default {
   findAllUserFirstCreated,
   findAllCreatedUser,
   findAllAllUsers,
+  postUser,
+  getRouteUsers,
+  getUserUuid,
+  userArray,
 };

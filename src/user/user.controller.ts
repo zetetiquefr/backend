@@ -1,4 +1,6 @@
 import {
+  NotFoundException,
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -47,7 +49,12 @@ export class UserController {
 
   @Get('/:uuid')
   async getUserByUuid(@Param('uuid') uuid: string): Promise<User> {
-    return await this.userService.getUserByUuid(uuid);
+    const res: User = await this.userService.getUserByUuid(uuid);
+
+    if (!res) {
+      throw new NotFoundException('User not found');
+    }
+    return res;
   }
 
   @Get('/name/:name')
@@ -57,6 +64,11 @@ export class UserController {
 
   @Post('/')
   async createUser(@Body() user: CreateUserDto): Promise<User> {
+    const fetchedUser: User = await this.userService.getUserByEmail(user.email);
+
+    if (fetchedUser) {
+      throw new BadRequestException('User already exists');
+    }
     return await this.userService.createUser(user);
   }
 
